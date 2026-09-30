@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "release_id": "checkout-2026.09.30",
+  "environment": "staging",
+  "observed_at": "2026-09-29T09:59:00Z",
+  "service": {
+    "ready_replicas": 3,
+    "desired_replicas": 3,
+    "total_requests": 5000,
+    "error_requests": 10,
+    "window_seconds": 120
+  },
+  "restore": {
+    "completed_at": "2026-09-30T09:00:00Z",
+    "checksum_verified": true,
+    "duration_seconds": 85,
+    "environment": "staging",
+    "backup_id": "synthetic-backup-42",
+    "artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  }
+}

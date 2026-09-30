@@ -2,8 +2,8 @@ pipeline {
   agent any
   options { timestamps(); disableConcurrentBuilds(); timeout(time: 15, unit: 'MINUTES') }
   stages {
-    stage('Test') { steps { sh 'python3 -m unittest -v test_app.py' } }
-    stage('Build') { steps { sh 'docker build -t platform-demo:$BUILD_NUMBER .' } }
+    stage('Test') { steps { dir('projects/kubernetes-sre-lab') { sh 'python3 -m unittest -v test_app.py' } } }
+    stage('Build') { steps { dir('projects/kubernetes-sre-lab') { sh 'docker build -t platform-demo:$BUILD_NUMBER .' } } }
     stage('Smoke test') {
       steps {
         sh '''

@@ -1,0 +1,24 @@
+# Validation only. A self-hosted agent must have Terraform 1.6+ and Python 3 installed.
+# No service connection, cloud login, plan, apply or destroy is performed.
+trigger:
+  branches:
+    include: [main]
+  paths:
+    include: [projects/azure-aks-platform-lab/*]
+pool:
+  name: PortfolioValidation
+steps:
+  - checkout: self
+    persistCredentials: false
+  - script: |
+      set -eu
+      terraform version
+      terraform fmt -check -recursive
+      terraform init -backend=false -input=false -lockfile=readonly
+      terraform validate -no-color
+    workingDirectory: projects/azure-aks-platform-lab
+    displayName: Validate Terraform (no cloud deployment)
+    env:
+      TF_IN_AUTOMATION: 'true'
+  - script: python3 -m unittest discover -s projects/releaseguard -v
+    displayName: Test ReleaseGuard

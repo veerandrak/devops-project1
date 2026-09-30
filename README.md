@@ -1,25 +1,35 @@
-# Sai Veerandra Kurakula — DevOps & Cloud Portfolio
+# Sai Veerandra Kurakula | Cloud & DevOps Engineering
 
-Hands-on portfolio work aligned with my experience in AWS, Azure, Kubernetes, Terraform, CI/CD, Python, Linux, observability, and secrets management.
+Building secure infrastructure, repeatable delivery and operational evidence with **AWS, Azure, Kubernetes, Terraform, Jenkins and Python**.
 
-## Projects
+Based in Visakhapatnam, India · Open to fully remote Cloud, DevOps, SRE and Platform opportunities.
 
-| Project | What you can inspect and run | Core technologies |
-| --- | --- | --- |
-| [Kubernetes reliability lab](projects/kubernetes-sre-lab) | Health/metrics API, hardened container, Jenkins pipeline, deployment policy, alert and rollback drills | Python, Docker, Kubernetes, Prometheus, Jenkins |
-| [AWS encrypted backup & restore](projects/aws-encrypted-backup-lab) | Private versioned storage, encryption controls, least-privilege policy, version-specific restore with checksum verification | AWS S3, KMS, IAM, Terraform, Python |
+My background includes 6+ years across build/release engineering and cloud operations, with AWS/EKS/ECS and Azure/AKS, Linux, Python/Bash, infrastructure as code, CI/CD, observability and secrets-management integrations. These newly authored labs demonstrate those areas; they are not employer code, historical production results or certification claims.
 
-Each project includes setup instructions, design trade-offs, operational guidance, and explicit validation limits. These are independent portfolio demonstrations, not employer code or claims of historical production outcomes.
+## Explore the portfolio
 
-## Professional focus
+| Project | What to review | Local evidence |
+|---|---|---|
+| [Kubernetes SRE lab](projects/kubernetes-sre-lab) | Health/metrics API, hardened deployment, disruption budget, network policy, Prometheus alerts and Jenkins pipeline | 4 Python integration tests |
+| [AWS encrypted backup lab](projects/aws-encrypted-backup-lab) | S3/KMS/IAM Terraform; version-specific backup and integrity-checked restore CLI | 4 Python unit tests |
+| [Azure AKS platform lab](projects/azure-aks-platform-lab) | Private API/DNS, Entra RBAC, managed/workload identity, overlay networking and Azure DevOps validation pipeline | Terraform fmt + HCL/YAML parsing; see validation notes |
+| [ReleaseGuard](projects/releaseguard) | Explainable release pass/hold decisions combining telemetry and restore evidence | 14 Python tests; synthetic pass/hold scenarios |
 
-- Cloud infrastructure and platform operations across AWS and Azure
-- Infrastructure as code and repeatable deployment workflows
-- Kubernetes reliability, container security, and operational monitoring
-- Secrets management integrations with Vault and CyberArk
+**Start with ReleaseGuard** for the engineering decisions: fail-closed input handling, explicit trust boundaries, release/environment binding and replay that cannot authorize deployment. It is an original implementation for this portfolio, without a claim that the concept is globally unique.
 
-## Validation
+## Reproduce local tests
 
-Eight Python tests passed locally across the service and backup projects. YAML and Terraform HCL syntax were parsed. Cloud provisioning, container builds, Kubernetes deployment and Jenkins execution have not yet been performed; each README lists the required next checks.
+After cloning this repository, use Python 3.12:
+```sh
+(cd projects/kubernetes-sre-lab && python -m unittest -v)
+# AWS tests require the dependencies listed in that project's requirements.txt
+(cd projects/aws-encrypted-backup-lab && python -m unittest -v)
+(cd projects/releaseguard && python -m unittest -v)
+```
+Each project contains its own setup, design decisions and operational limitations. Azure's pipeline is validation-only and requires a configured agent; it does not deploy anything.
 
-The original `index.html` is retained as part of this repository's history and content.
+## Validation boundaries
+
+All 22 Python tests passed locally. AKS Terraform formatting, HCL/YAML parsing and provider initialization passed; provider-schema validation was blocked by a local plugin handshake failure. Terraform provider validation and cloud plans/provisioning, Docker/Compose, Kubernetes deployment, Jenkins and Azure DevOps execution have not been demonstrated. Syntax parsing is not proof of deployability. No cloud resources were created and no production reliability, savings or compliance outcomes are claimed.
+
+The existing [HTML page](index.html) is preserved. This repository is the portfolio landing page; the projects are intentionally grouped for convenient review.
