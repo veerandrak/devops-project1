@@ -1,0 +1,11 @@
+groups:
+  - name: platform-demo
+    rules:
+      - alert: DemoServiceDown
+        expr: up{job="platform-demo"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: Demo service scrape has failed for one minute
+          description: Check container health and connectivity using RUNBOOK.md.

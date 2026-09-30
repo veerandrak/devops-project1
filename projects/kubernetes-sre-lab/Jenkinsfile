@@ -1,0 +1,22 @@
+pipeline {
+  agent any
+  options { timestamps(); disableConcurrentBuilds(); timeout(time: 15, unit: 'MINUTES') }
+  stages {
+    stage('Test') { steps { sh 'python3 -m unittest -v test_app.py' } }
+    stage('Build') { steps { sh 'docker build -t platform-demo:$BUILD_NUMBER .' } }
+    stage('Smoke test') {
+      steps {
+        sh '''
+          set -eu
+          cid=$(docker run -d platform-demo:$BUILD_NUMBER)
+          trap 'docker rm -f "$cid" >/dev/null' EXIT
+          for attempt in 1 2 3 4 5; do
+            if docker exec "$cid" python -c "import urllib.request; assert urllib.request.urlopen('http://127.0.0.1:8080/readyz',timeout=2).status == 200"; then exit 0; fi
+            sleep 2
+          done
+          exit 1
+        '''
+      }
+    }
+  }
+}
