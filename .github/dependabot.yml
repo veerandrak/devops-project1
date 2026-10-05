@@ -1,0 +1,22 @@
+version: 2
+updates:
+  - package-ecosystem: "pip"
+    directory: "/projects/ai-devops-incident-agent"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "pip"
+    directory: "/projects/aws-encrypted-backup-lab"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "terraform"
+    directory: "/projects/aws-encrypted-backup-lab"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "terraform"
+    directory: "/projects/azure-aks-platform-lab"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
