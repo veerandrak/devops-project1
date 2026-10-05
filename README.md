@@ -1,6 +1,6 @@
 # Sai Veerandra Kurakula — Cloud, DevOps & SRE Portfolio
 
-[![Portfolio CI](https://github.com/veerandrak/devops-project1/actions/workflows/ci.yml/badge.svg)](https://github.com/veerandrak/devops-project1/actions/workflows/ci.yml)
+[![Portfolio CI](https://github.com/veerandrak/devops-project1/actions/workflows/ci.yml/badge.svg)](https://github.com/veerandrak/devops-project1/actions/workflows/ci.yml) [![Security Baseline](https://github.com/veerandrak/devops-project1/actions/workflows/security.yml/badge.svg)](https://github.com/veerandrak/devops-project1/actions/workflows/security.yml) [![CodeQL](https://github.com/veerandrak/devops-project1/actions/workflows/codeql.yml/badge.svg)](https://github.com/veerandrak/devops-project1/actions/workflows/codeql.yml)
 
 Engineering portfolio focused on **AWS, Azure, Kubernetes, Terraform, CI/CD, Python, reliability, security and AI-assisted operations**.
 
@@ -61,6 +61,13 @@ Python 3.12 is recommended.
 ```
 
 GitHub Actions runs these checks automatically and also verifies Terraform formatting.
+
+## Reviewer shortcuts
+
+- [Architecture overview](docs/ARCHITECTURE.md)
+- [Portfolio evidence matrix](docs/PORTFOLIO_EVIDENCE.md)
+- [10-minute reviewer guide](docs/REVIEWER_GUIDE.md)
+- [Security policy](SECURITY.md)
 
 ## Validation status
 
