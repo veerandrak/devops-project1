@@ -1,37 +1,78 @@
-# Sai Veerandra Kurakula | Cloud & DevOps Engineering
+# Sai Veerandra Kurakula — Cloud, DevOps & SRE Portfolio
 
-Building secure infrastructure, repeatable delivery and operational evidence with **AWS, Azure, Kubernetes, Terraform, Jenkins and Python**.
+[![Portfolio CI](https://github.com/veerandrak/devops-project1/actions/workflows/ci.yml/badge.svg)](https://github.com/veerandrak/devops-project1/actions/workflows/ci.yml)
 
-Based in Visakhapatnam, India · Open to fully remote Cloud, DevOps, SRE and Platform opportunities.
+Engineering portfolio focused on **AWS, Azure, Kubernetes, Terraform, CI/CD, Python, reliability, security and AI-assisted operations**.
 
-My background includes 6+ years across build/release engineering and cloud operations, with AWS/EKS/ECS and Azure/AKS, Linux, Python/Bash, infrastructure as code, CI/CD, observability and secrets-management integrations. These newly authored labs demonstrate those areas; they are not employer code, historical production results or certification claims.
+The projects here are designed to make engineering decisions reviewable: each one documents its trust boundaries, tests, operational trade-offs and current validation status. No employer source code or unverified production outcomes are presented as portfolio results.
 
-## Explore the portfolio
+## Start here
 
-| Project | What to review | Local evidence |
+| Project | What it demonstrates | Current evidence |
 |---|---|---|
-| [Kubernetes SRE lab](projects/kubernetes-sre-lab) | Health/metrics API, hardened deployment, disruption budget, network policy, Prometheus alerts and Jenkins pipeline | 4 Python integration tests |
-| [AWS encrypted backup lab](projects/aws-encrypted-backup-lab) | S3/KMS/IAM Terraform; version-specific backup and integrity-checked restore CLI | 4 Python unit tests |
-| [Azure AKS platform lab](projects/azure-aks-platform-lab) | Private API/DNS, Entra RBAC, managed/workload identity, overlay networking and Azure DevOps validation pipeline | Terraform fmt + HCL/YAML parsing; see validation notes |
-| [Rotation Rehearsal](projects/rotation-rehearsal) | Dependency-aware credential migration waves, team capacity, expiry and retirement evidence checks | 15 Python tests; synthetic healthy/old-version scenarios |
-| [ReleaseGuard](projects/releaseguard) | Explainable release pass/hold decisions combining telemetry and restore evidence | 14 Python tests; synthetic pass/hold scenarios |
+| **[AI DevOps Incident Agent](projects/ai-devops-incident-agent)** | FastAPI incident intake, deterministic signal detection, local runbook retrieval, structured triage and a no-execution safety boundary | Runnable API + automated tests |
+| **[ReleaseGuard](projects/releaseguard)** | Fail-closed release decisions from telemetry and restore evidence | 14 automated tests + synthetic pass/hold scenarios |
+| **[Rotation Rehearsal](projects/rotation-rehearsal)** | Dependency-aware secrets migration planning, capacity constraints and retirement evidence | 15 automated tests + synthetic scenarios |
+| **[Kubernetes Reliability Lab](projects/kubernetes-sre-lab)** | Hardened container, Kubernetes probes/policies, Prometheus alerts, Jenkins pipeline and runbook | Python integration tests; deployment steps documented |
+| **[AWS Encrypted Backup Lab](projects/aws-encrypted-backup-lab)** | S3/KMS/IAM Terraform, immutable-version restore and SHA-256 integrity verification | Python unit tests; cloud deployment intentionally not claimed |
+| **[Azure AKS Platform Lab](projects/azure-aks-platform-lab)** | Private AKS design, Entra RBAC, managed/workload identity and validation pipeline | Terraform/YAML design; cloud deployment intentionally not claimed |
 
-**Start with ReleaseGuard** for the engineering decisions: fail-closed input handling, explicit trust boundaries, release/environment binding and replay that cannot authorize deployment. It is an original implementation for this portfolio, without a claim that the concept is globally unique.
+## Flagship: AI DevOps Incident Agent
 
-## Reproduce local tests
+The first milestone is deliberately deterministic before adding an LLM:
 
-After cloning this repository, use Python 3.12:
-```sh
+```text
+Incident JSON
+    |
+    v
+FastAPI /triage
+    |
+    +--> signal detector
+    |
+    +--> local runbook retrieval
+    |
+    v
+structured recommendations
+    |
+    v
+execution_authorized: false
+```
+
+This establishes a testable safety boundary before future RAG, LLM summarization, read-only tooling and human approval workflows are introduced.
+
+## Engineering themes
+
+- **Reliability:** health/readiness checks, disruption budgets, rollback thinking, restore evidence and fail-closed gates.
+- **Security:** least privilege, KMS encryption, non-root containers, strict input validation, identity-first cloud design and explicit trust boundaries.
+- **Automation:** Terraform, Python, Jenkins, Azure Pipelines and GitHub Actions.
+- **Operations:** runbooks, failure drills, evidence freshness, reproducibility and cleanup procedures.
+- **AI + DevOps:** build deterministic evidence and approval boundaries first; add model reasoning without granting implicit production authority.
+
+## Reproduce the local checks
+
+Python 3.12 is recommended.
+
+```bash
+(cd projects/ai-devops-incident-agent && python -m pip install -r requirements-dev.txt && pytest -q)
 (cd projects/kubernetes-sre-lab && python -m unittest -v)
-# AWS tests require the dependencies listed in that project's requirements.txt
-(cd projects/aws-encrypted-backup-lab && python -m unittest -v)
+(cd projects/aws-encrypted-backup-lab && python -m pip install -r requirements.txt && python -m unittest -v)
 (cd projects/releaseguard && python -m unittest -v)
 (cd projects/rotation-rehearsal && python -m unittest -v)
 ```
-Each project contains its own setup, design decisions and operational limitations. Azure's pipeline is validation-only and requires a configured agent; it does not deploy anything.
 
-## Validation boundaries
+GitHub Actions runs these checks automatically and also verifies Terraform formatting.
 
-The original four labs' 22 Python tests passed during their September 30 authoring validation. Rotation Rehearsal's 15 tests passed locally on October 5; its CLI samples were also exercised. The original tests were not rerun for this isolated addition. Rotation Rehearsal is offline and has no live secrets-provider integration. AKS Terraform formatting, HCL/YAML parsing and provider initialization passed; provider-schema validation was blocked by a local plugin handshake failure. Terraform provider validation and cloud plans/provisioning, Docker/Compose, Kubernetes deployment, Jenkins and Azure DevOps execution have not been demonstrated. Syntax parsing is not proof of deployability. No cloud resources were created and no production reliability, savings or compliance outcomes are claimed.
+## Validation status
 
-The existing [HTML page](index.html) is preserved. This repository is the portfolio landing page; the projects are intentionally grouped for convenient review.
+This portfolio separates **implemented/tested**, **locally runnable**, and **cloud-deployed** evidence. A README saying something is designed does not make it deployed. Cloud resources, production SLOs, cost savings and compliance outcomes are only claimed when repository evidence supports them.
+
+## Roadmap
+
+See **[AI + DevOps 90-Day Roadmap](AI_DEVOPS_90_DAY_ROADMAP.md)** for the planned progression from deterministic incident triage to RAG, tool calling, approval-gated agents, observability and platform deployment.
+
+## Working style
+
+Future changes should follow **issue → branch → pull request → CI → merge**. See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+---
+**Target roles:** Cloud Engineer · DevOps Engineer · SRE · Platform Engineer · AI Platform / LLMOps
