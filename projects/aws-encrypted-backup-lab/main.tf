@@ -68,18 +68,18 @@ resource "aws_s3_bucket_policy" "backup" {
     Version = "2012-10-17"
     Statement = [
       {
-        Sid = "DenyInsecureTransport", Effect = "Deny", Principal = "*", Action = "s3:*"
-        Resource = [aws_s3_bucket.backup.arn, "${aws_s3_bucket.backup.arn}/*"]
+        Sid       = "DenyInsecureTransport", Effect = "Deny", Principal = "*", Action = "s3:*"
+        Resource  = [aws_s3_bucket.backup.arn, "${aws_s3_bucket.backup.arn}/*"]
         Condition = { Bool = { "aws:SecureTransport" = "false" } }
       },
       {
-        Sid = "RequireKMS", Effect = "Deny", Principal = "*", Action = "s3:PutObject"
-        Resource = "${aws_s3_bucket.backup.arn}/*"
+        Sid       = "RequireKMS", Effect = "Deny", Principal = "*", Action = "s3:PutObject"
+        Resource  = "${aws_s3_bucket.backup.arn}/*"
         Condition = { StringNotEquals = { "s3:x-amz-server-side-encryption" = "aws:kms" } }
       },
       {
-        Sid = "RequireThisKey", Effect = "Deny", Principal = "*", Action = "s3:PutObject"
-        Resource = "${aws_s3_bucket.backup.arn}/*"
+        Sid       = "RequireThisKey", Effect = "Deny", Principal = "*", Action = "s3:PutObject"
+        Resource  = "${aws_s3_bucket.backup.arn}/*"
         Condition = { StringNotEquals = { "s3:x-amz-server-side-encryption-aws-kms-key-id" = aws_kms_key.backup.arn } }
       }
     ]
@@ -94,18 +94,18 @@ resource "aws_iam_policy" "backup_operator" {
     Version = "2012-10-17"
     Statement = [
       {
-        Effect = "Allow", Action = ["s3:ListBucket", "s3:ListBucketVersions"]
-        Resource = aws_s3_bucket.backup.arn
+        Effect    = "Allow", Action = ["s3:ListBucket", "s3:ListBucketVersions"]
+        Resource  = aws_s3_bucket.backup.arn
         Condition = { StringLike = { "s3:prefix" = ["backups/*"] } }
       },
       {
-        Effect = "Allow"
-        Action = ["s3:PutObject", "s3:GetObject", "s3:GetObjectVersion", "s3:AbortMultipartUpload", "s3:ListMultipartUploadParts"]
+        Effect   = "Allow"
+        Action   = ["s3:PutObject", "s3:GetObject", "s3:GetObjectVersion", "s3:AbortMultipartUpload", "s3:ListMultipartUploadParts"]
         Resource = "${aws_s3_bucket.backup.arn}/backups/*"
       },
       {
-        Effect = "Allow", Action = ["kms:GenerateDataKey", "kms:Decrypt"]
-        Resource = aws_kms_key.backup.arn
+        Effect    = "Allow", Action = ["kms:GenerateDataKey", "kms:Decrypt"]
+        Resource  = aws_kms_key.backup.arn
         Condition = { StringEquals = { "kms:ViaService" = "s3.${var.region}.amazonaws.com" } }
       }
     ]
