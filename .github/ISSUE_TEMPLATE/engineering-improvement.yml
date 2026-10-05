@@ -1,0 +1,27 @@
+name: Engineering improvement
+description: Propose a scoped feature, reliability improvement or portfolio enhancement
+title: "feat: "
+labels: []
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or opportunity
+      description: What engineering problem should this change solve?
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: What observable behavior or evidence will show that the work is complete?
+      placeholder: |
+        - [ ] ...
+        - [ ] ...
+    validations:
+      required: true
+  - type: textarea
+    id: risks
+    attributes:
+      label: Risks and trust boundaries
+      description: Note credentials, destructive actions, external dependencies, cloud cost or production-safety concerns.

@@ -1,0 +1,12 @@
+{
+  "service": "checkout",
+  "environment": "staging",
+  "title": "Checkout latency increased after deployment",
+  "symptoms": [
+    "p95 latency is high",
+    "database connection timeout"
+  ],
+  "logs": [
+    "connection refused while opening database session"
+  ]
+}
