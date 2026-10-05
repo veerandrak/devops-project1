@@ -4,19 +4,41 @@ updates:
     directory: "/projects/ai-devops-incident-agent"
     schedule:
       interval: "weekly"
+    groups:
+      incident-agent-python:
+        patterns: ["*"]
+
   - package-ecosystem: "pip"
     directory: "/projects/aws-encrypted-backup-lab"
     schedule:
       interval: "weekly"
+    groups:
+      aws-backup-python:
+        patterns: ["*"]
+
   - package-ecosystem: "terraform"
     directory: "/projects/aws-encrypted-backup-lab"
     schedule:
       interval: "weekly"
+    groups:
+      aws-terraform:
+        patterns: ["*"]
+
   - package-ecosystem: "terraform"
     directory: "/projects/azure-aks-platform-lab"
     schedule:
       interval: "weekly"
+    groups:
+      azure-terraform:
+        patterns: ["*"]
+    ignore:
+      - dependency-name: "hashicorp/azurerm"
+        update-types: ["version-update:semver-major"]
+
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
+    groups:
+      github-actions:
+        patterns: ["*"]

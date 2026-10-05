@@ -22,8 +22,8 @@ jobs:
           - releaseguard
           - rotation-rehearsal
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
           cache: pip
@@ -54,9 +54,10 @@ jobs:
   terraform-format:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: hashicorp/setup-terraform@v3
+      - uses: actions/checkout@v7
+      - uses: hashicorp/setup-terraform@v4
       - name: Check Terraform formatting
         run: |
-          terraform fmt -check -recursive projects/aws-encrypted-backup-lab
-          terraform fmt -check -recursive projects/azure-aks-platform-lab
+          terraform fmt -recursive projects/aws-encrypted-backup-lab
+          terraform fmt -recursive projects/azure-aks-platform-lab
+          git diff --exit-code -- projects/aws-encrypted-backup-lab projects/azure-aks-platform-lab
