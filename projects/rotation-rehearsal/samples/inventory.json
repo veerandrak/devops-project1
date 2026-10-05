@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "rotation_id": "payments-demo-001",
+  "environment": "sandbox",
+  "credential_id": "database-login-demo",
+  "old_version": "v1",
+  "new_version": "v2",
+  "expires_at": "2026-10-05T13:00:00Z",
+  "teams": {"platform": 1, "payments": 1},
+  "consumers": [
+    {"id": "connection-proxy", "team": "platform", "depends_on": [], "rollout_seconds": 120, "verify_seconds": 60},
+    {"id": "checkout-api", "team": "payments", "depends_on": ["connection-proxy"], "rollout_seconds": 180, "verify_seconds": 60},
+    {"id": "refund-worker", "team": "payments", "depends_on": ["connection-proxy"], "rollout_seconds": 120, "verify_seconds": 60},
+    {"id": "reconciliation", "team": "platform", "depends_on": ["checkout-api", "refund-worker"], "rollout_seconds": 60, "verify_seconds": 60}
+  ]
+}

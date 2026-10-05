@@ -1,0 +1,29 @@
+{
+  "plan_id": "543b9351a3200f3af1ce22ddf5af037577588b4e323bdc2a61ee6b52f07fae2a",
+  "observations": [
+    {
+      "consumer": "connection-proxy",
+      "version": "v2",
+      "healthy": true,
+      "observed_at": "2026-10-05T10:12:00Z"
+    },
+    {
+      "consumer": "checkout-api",
+      "version": "v2",
+      "healthy": true,
+      "observed_at": "2026-10-05T10:12:00Z"
+    },
+    {
+      "consumer": "refund-worker",
+      "version": "v1",
+      "healthy": true,
+      "observed_at": "2026-10-05T10:12:00Z"
+    },
+    {
+      "consumer": "reconciliation",
+      "version": "v2",
+      "healthy": true,
+      "observed_at": "2026-10-05T10:12:00Z"
+    }
+  ]
+}
