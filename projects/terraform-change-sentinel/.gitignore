@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+*.tfplan
+plan*.json
+!samples/*.json

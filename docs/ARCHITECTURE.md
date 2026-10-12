@@ -10,7 +10,9 @@ flowchart TD
   O --> R[ReleaseGuard]
   O --> S[Rotation Rehearsal]
   O --> I[AI DevOps Incident Agent]
+  O --> C[Terraform Change Sentinel]
 
+  C --> R
   K --> R
   A --> R
   S --> I
@@ -39,6 +41,7 @@ A passing unit test is not presented as a cloud deployment. Terraform syntax is 
 | Project | Inputs | Decision/output | Main trust boundary |
 |---|---|---|---|
 | AI DevOps Incident Agent | Incident title, symptoms and logs | Signals, runbook guidance, recommended next steps | Recommendations do not execute |
+| Terraform Change Sentinel | Terraform plan JSON | Redacted review/hold packet | Reads sensitive plan locally; never applies |
 | ReleaseGuard | Service telemetry + restore evidence | Release pass/hold | Evidence authenticity is external |
 | Rotation Rehearsal | Consumer/dependency manifest + observations | Migration waves + retirement review | Does not rotate/revoke credentials |
 | Kubernetes Reliability Lab | Local service + manifests | Health/metrics/rollout behavior | Demo workload, not production |
@@ -49,7 +52,8 @@ A passing unit test is not presented as a cloud deployment. Terraform syntax is 
 
 For a 10-minute technical review:
 
-1. **ReleaseGuard** — fail-closed operational decision logic.
-2. **AI DevOps Incident Agent** — deterministic AI-ready architecture and safety boundary.
-3. **Kubernetes Reliability Lab** — workload hardening, probes, disruption policy and runbook.
-4. **Rotation Rehearsal** — dependency graph and evidence binding.
+1. **Terraform Change Sentinel** — redacted, fail-closed infrastructure change review.
+2. **ReleaseGuard** — fail-closed operational decision logic.
+3. **AI DevOps Incident Agent** — deterministic AI-ready architecture and safety boundary.
+4. **Kubernetes Reliability Lab** — workload hardening, probes, disruption policy and runbook.
+5. **Rotation Rehearsal** — dependency graph and evidence binding.

@@ -11,6 +11,7 @@ The projects here are designed to make engineering decisions reviewable: each on
 | Project | What it demonstrates | Current evidence |
 |---|---|---|
 | **[AI DevOps Incident Agent](projects/ai-devops-incident-agent)** | FastAPI incident intake, deterministic signal detection, local runbook retrieval, structured triage and a no-execution safety boundary | Runnable API + automated tests |
+| **[Terraform Change Sentinel](projects/terraform-change-sentinel)** | Redacted Terraform plan review, destructive/privilege/network risk detection and fail-closed change packets | 17 automated tests + synthetic safe/hold plans |
 | **[ReleaseGuard](projects/releaseguard)** | Fail-closed release decisions from telemetry and restore evidence | 14 automated tests + synthetic pass/hold scenarios |
 | **[Rotation Rehearsal](projects/rotation-rehearsal)** | Dependency-aware secrets migration planning, capacity constraints and retirement evidence | 15 automated tests + synthetic scenarios |
 | **[Kubernetes Reliability Lab](projects/kubernetes-sre-lab)** | Hardened container, Kubernetes probes/policies, Prometheus alerts, Jenkins pipeline and runbook | Python integration tests; deployment steps documented |
@@ -45,6 +46,7 @@ This establishes a testable safety boundary before future RAG, LLM summarization
 - **Reliability:** health/readiness checks, disruption budgets, rollback thinking, restore evidence and fail-closed gates.
 - **Security:** least privilege, KMS encryption, non-root containers, strict input validation, identity-first cloud design and explicit trust boundaries.
 - **Automation:** Terraform, Python, Jenkins, Azure Pipelines and GitHub Actions.
+- **Change safety:** redacted infrastructure-plan review, destructive-change holds and explicit human authority.
 - **Operations:** runbooks, failure drills, evidence freshness, reproducibility and cleanup procedures.
 - **AI + DevOps:** build deterministic evidence and approval boundaries first; add model reasoning without granting implicit production authority.
 
@@ -58,6 +60,7 @@ Python 3.12 is recommended.
 (cd projects/aws-encrypted-backup-lab && python -m pip install -r requirements.txt && python -m unittest -v)
 (cd projects/releaseguard && python -m unittest -v)
 (cd projects/rotation-rehearsal && python -m unittest -v)
+(cd projects/terraform-change-sentinel && python -m unittest -v)
 ```
 
 GitHub Actions runs these checks automatically and also verifies Terraform formatting.

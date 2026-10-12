@@ -21,6 +21,7 @@ jobs:
           - aws-encrypted-backup-lab
           - releaseguard
           - rotation-rehearsal
+          - terraform-change-sentinel
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-python@v7

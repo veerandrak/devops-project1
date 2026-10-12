@@ -5,6 +5,7 @@ This file gives recruiters and reviewers a fast way to distinguish **implemented
 | Project | Implemented | Automated tests | Local execution path | Cloud deployment evidence | Key limitation |
 |---|:---:|:---:|:---:|:---:|---|
 | AI DevOps Incident Agent | ✅ | ✅ | ✅ | — | Deterministic baseline; no LLM/RAG/tools yet |
+| Terraform Change Sentinel | ✅ | ✅ | ✅ | — | Selected deterministic rules; no real plan/provider/apply evidence |
 | ReleaseGuard | ✅ | ✅ | ✅ | — | Evidence authenticity comes from trusted collectors |
 | Rotation Rehearsal | ✅ | ✅ | ✅ | — | Offline planner; no live secrets-provider adapter |
 | Kubernetes Reliability Lab | ✅ | ✅ | ✅ documented | ❌ | Docker/Kubernetes/Jenkins execution evidence not yet published |
@@ -21,7 +22,8 @@ This file gives recruiters and reviewers a fast way to distinguish **implemented
 ## Next evidence milestones
 
 1. Run and capture a clean GitHub Actions CI result.
-2. Run the Kubernetes lab on a disposable local cluster and publish sanitized rollout/rollback evidence.
-3. Run the AWS backup lab in a disposable account/sandbox and publish a sanitized plan, backup receipt and verified restore.
-4. Complete an AKS `terraform validate`/plan against an authorized sandbox before claiming deployability.
-5. Add measurable retrieval evaluation when the Incident Agent gains RAG.
+2. Evaluate a sanitized plan from an authorized disposable Terraform sandbox without publishing the private plan JSON.
+3. Run the Kubernetes lab on a disposable local cluster and publish sanitized rollout/rollback evidence.
+4. Run the AWS backup lab in a disposable account/sandbox and publish a sanitized plan, backup receipt and verified restore.
+5. Complete an AKS `terraform validate`/plan against an authorized sandbox before claiming deployability.
+6. Add measurable retrieval evaluation when the Incident Agent gains RAG.

@@ -1,0 +1,37 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.9.8",
+  "resource_changes": [
+    {
+      "address": "aws_cloudwatch_log_group.app",
+      "mode": "managed",
+      "type": "aws_cloudwatch_log_group",
+      "name": "app",
+      "change": {
+        "actions": ["update"],
+        "before": {"retention_in_days": 30},
+        "after": {"retention_in_days": 90},
+        "before_sensitive": {},
+        "after_sensitive": {}
+      }
+    },
+    {
+      "address": "aws_s3_bucket_public_access_block.evidence",
+      "mode": "managed",
+      "type": "aws_s3_bucket_public_access_block",
+      "name": "evidence",
+      "change": {
+        "actions": ["create"],
+        "before": null,
+        "after": {
+          "block_public_acls": true,
+          "block_public_policy": true,
+          "ignore_public_acls": true,
+          "restrict_public_buckets": true
+        },
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    }
+  ]
+}
