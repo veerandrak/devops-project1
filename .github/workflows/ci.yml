@@ -22,6 +22,7 @@ jobs:
           - releaseguard
           - rotation-rehearsal
           - terraform-change-sentinel
+          - drainscope
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-python@v7

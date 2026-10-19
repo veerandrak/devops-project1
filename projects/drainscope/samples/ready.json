@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-10-19T09:29:00Z",
+  "target_node": {"name": "worker-a", "zone": "zone-a"},
+  "replacement_nodes": [
+    {"name": "worker-b", "zone": "zone-b", "ready": true, "schedulable": true, "free": {"cpu_millicores": 2000, "memory_mib": 4096}},
+    {"name": "worker-c", "zone": "zone-c", "ready": true, "schedulable": true, "free": {"cpu_millicores": 1500, "memory_mib": 3072}}
+  ],
+  "pods": [
+    {
+      "namespace": "checkout", "name": "api-7c94", "phase": "Running",
+      "owner": {"kind": "ReplicaSet", "name": "api-7c94"},
+      "controller": {"desired_replicas": 3, "ready_replicas": 3},
+      "critical": false, "local_storage": [],
+      "pdb": {"name": "checkout-api", "disruptions_allowed": 1},
+      "requests": {"cpu_millicores": 500, "memory_mib": 512},
+      "eligible_nodes": ["worker-b", "worker-c"],
+      "peer_zones": ["zone-b", "zone-c"]
+    },
+    {
+      "namespace": "monitoring", "name": "node-exporter-j8p2", "phase": "Running",
+      "owner": {"kind": "DaemonSet", "name": "node-exporter"}, "controller": null,
+      "critical": false, "local_storage": [], "pdb": null,
+      "requests": {"cpu_millicores": 50, "memory_mib": 64},
+      "eligible_nodes": [], "peer_zones": []
+    }
+  ]
+}
