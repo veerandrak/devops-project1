@@ -11,9 +11,12 @@ flowchart TD
   O --> S[Rotation Rehearsal]
   O --> I[AI DevOps Incident Agent]
   O --> C[Terraform Change Sentinel]
+  O --> D[DrainScope]
 
   C --> R
   K --> R
+  D --> K
+  D --> R
   A --> R
   S --> I
   K --> I
@@ -25,7 +28,7 @@ flowchart TD
 ## Design principles
 
 ### 1. Evidence before automation
-ReleaseGuard requires fresh telemetry and restore evidence. Rotation Rehearsal requires plan-bound observations. The Incident Agent starts with deterministic inputs before any model is introduced.
+ReleaseGuard requires fresh telemetry and restore evidence. Rotation Rehearsal requires plan-bound observations. DrainScope requires a fresh, sanitized cluster snapshot. The Incident Agent starts with deterministic inputs before any model is introduced.
 
 ### 2. Human authority stays explicit
 No current project automatically performs a destructive cloud, Kubernetes, credential or deployment action. Any future action layer must make approval and auditability first-class concerns.
@@ -42,6 +45,7 @@ A passing unit test is not presented as a cloud deployment. Terraform syntax is 
 |---|---|---|---|
 | AI DevOps Incident Agent | Incident title, symptoms and logs | Signals, runbook guidance, recommended next steps | Recommendations do not execute |
 | Terraform Change Sentinel | Terraform plan JSON | Redacted review/hold packet | Reads sensitive plan locally; never applies |
+| DrainScope | Sanitized node, pod, PDB and capacity snapshot | Explainable drain review/hold packet | Offline approximation; never contacts or drains a cluster |
 | ReleaseGuard | Service telemetry + restore evidence | Release pass/hold | Evidence authenticity is external |
 | Rotation Rehearsal | Consumer/dependency manifest + observations | Migration waves + retirement review | Does not rotate/revoke credentials |
 | Kubernetes Reliability Lab | Local service + manifests | Health/metrics/rollout behavior | Demo workload, not production |
@@ -52,8 +56,8 @@ A passing unit test is not presented as a cloud deployment. Terraform syntax is 
 
 For a 10-minute technical review:
 
-1. **Terraform Change Sentinel** — redacted, fail-closed infrastructure change review.
-2. **ReleaseGuard** — fail-closed operational decision logic.
-3. **AI DevOps Incident Agent** — deterministic AI-ready architecture and safety boundary.
-4. **Kubernetes Reliability Lab** — workload hardening, probes, disruption policy and runbook.
-5. **Rotation Rehearsal** — dependency graph and evidence binding.
+1. **DrainScope** — PDB, capacity and topology-aware Kubernetes maintenance review.
+2. **Terraform Change Sentinel** — redacted, fail-closed infrastructure change review.
+3. **ReleaseGuard** — fail-closed operational decision logic.
+4. **AI DevOps Incident Agent** — deterministic AI-ready architecture and safety boundary.
+5. **Kubernetes Reliability Lab** — workload hardening, probes, disruption policy and runbook.

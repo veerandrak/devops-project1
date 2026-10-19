@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-10-19T09:29:00Z",
+  "target_node": {"name": "worker-a", "zone": "zone-a"},
+  "replacement_nodes": [
+    {"name": "worker-b", "zone": "zone-a", "ready": true, "schedulable": true, "free": {"cpu_millicores": 300, "memory_mib": 256}},
+    {"name": "worker-c", "zone": "zone-c", "ready": false, "schedulable": false, "free": {"cpu_millicores": 4000, "memory_mib": 8192}}
+  ],
+  "pods": [
+    {
+      "namespace": "payments", "name": "api-0", "phase": "Running",
+      "owner": {"kind": "StatefulSet", "name": "api"},
+      "controller": {"desired_replicas": 2, "ready_replicas": 1},
+      "critical": true,
+      "local_storage": [{"kind": "emptyDir", "size_limit_mib": null}],
+      "pdb": {"name": "payments-api", "disruptions_allowed": 0},
+      "requests": {"cpu_millicores": 500, "memory_mib": 512},
+      "eligible_nodes": ["worker-b", "worker-c"],
+      "peer_zones": ["zone-a"]
+    },
+    {
+      "namespace": "legacy", "name": "worker", "phase": "Running",
+      "owner": null, "controller": null, "critical": false,
+      "local_storage": [{"kind": "hostPath", "size_limit_mib": 256}],
+      "pdb": null,
+      "requests": {"cpu_millicores": 100, "memory_mib": 128},
+      "eligible_nodes": ["worker-b"], "peer_zones": []
+    }
+  ]
+}
